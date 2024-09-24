@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: eco-predict-backend  # Nom du conteneur
-          image: zetsu225/eco-predict-backend:dev-2e2c77de6a7efdedefe1f6bf08fdcde03074394e
+          image: zetsu225/eco-predict-backend:dev-95774dedae0f32bb627a696c89fd091bd4d53280
           ports:
             - containerPort: 8000  # Port écouté par l'application
           envFrom:
