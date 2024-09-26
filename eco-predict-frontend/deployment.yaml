@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eco-predict-frontend  # Nom du déploiement
+  namespace: eco-predict-frontend-space  # Espace de noms
+  labels:
+    app: eco-predict-frontend  # Étiquette pour l'application
+spec:
+  replicas: 1  # Nombre de réplicas souhaités
+  selector:
+    matchLabels:
+      app: eco-predict-frontend  # Étiquette pour correspondre aux pods
+  template:
+    metadata:
+      labels:
+        app: eco-predict-frontend  # Étiquette pour les pods
+    spec:
+      containers:
+        - name: eco-predict-frontend  # Nom du conteneur
+          image: zetsu225/eco-predict-frontend:dev-95774dedae0f32bb627a696c89fd091bd4d53280
+          ports:
+            - containerPort: 3000  # Port écouté par l'application
+          envFrom:
+            - configMapRef:
+                name: eco-predict-frontend  # Référence au ConfigMap
+          # resources:
+          #   limits:
+          #     cpu: "500m"  # Limites de CPU
+          #     memory: "600Mi"  # Limites de mémoire
+          #   # requests:
+          #   #   cpu: "250m"  # Requêtes de CPU
+          #   #   memory: "300Mi"  # Requêtes de mémoire
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eco-predict-frontend
+  namespace: eco-predict-frontend-space
+data:
+  REACT_APP_API_URL: http://localhost:8000
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eco-predict-frontend #service-name
+  namespace: eco-predict-frontend-space #namespace
+spec:
+  selector:
+    app: eco-predict-frontend #app-name
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      nodePort: 32041 #port to be define
+  type: NodePort
+
+  
