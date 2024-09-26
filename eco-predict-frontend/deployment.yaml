@@ -39,7 +39,7 @@ metadata:
   name: eco-predict-frontend
   namespace: eco-predict-frontend-space
 data:
-  REACT_APP_API_URL: http://localhost:8000
+  REACT_APP_API_URL: http://eco-predict-backend.eco-predict-backend-space.svc.cluster.local:8000
 
 
 ---
