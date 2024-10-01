@@ -169,12 +169,13 @@ metadata:
   annotations:
     {}
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 8080
       targetPort: http
       protocol: TCP
       name: http
+      nodePort: 31080
   selector:
     app.kubernetes.io/name: trino
     app.kubernetes.io/instance: presto
