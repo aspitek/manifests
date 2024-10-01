@@ -7,7 +7,7 @@ spec:
   type: Python
   pythonVersion: "3"
   mode: cluster
-  image: "spark-etl:v1.0.0"
+  image: zetsu225/eureka:dev-880589491ee770765d370d25b0bd517fae328e1f
   imagePullPolicy: IfNotPresent
   mainApplicationFile: local:///app/main.py
   sparkVersion: "3.3.2"
