@@ -11,7 +11,8 @@ spec:
   imagePullPolicy: IfNotPresent
   mainApplicationFile: local:///app/main.py
   sparkVersion: "3.3.2"
-
+  restartPolicy:
+    type: Never
   sparkConf:
     spark.jars.packages: "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.5.0,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.79.0"
     spark.sql.extensions: "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
