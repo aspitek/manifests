@@ -46,7 +46,7 @@ metadata:
     app.kubernetes.io/version: "0.99.0"
     app.kubernetes.io/managed-by: Helm
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app.kubernetes.io/name: nessie
     app.kubernetes.io/instance: nessie
@@ -55,6 +55,7 @@ spec:
       port: 19120
       targetPort: 19120
       protocol: TCP
+      nodePort: 30120
   sessionAffinity: None
 ---
 # Source: nessie/templates/service.yaml
