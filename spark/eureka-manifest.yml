@@ -2,7 +2,7 @@ apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
   name: spark-etl
-  namespace: lake
+  namespace: lakehouse
 spec:
   type: Python
   pythonVersion: "3"
@@ -18,16 +18,16 @@ spec:
     spark.sql.extensions: "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
     spark.sql.catalog.standardized.io-impl: "org.apache.iceberg.aws.s3.S3FileIO"
     spark.sql.catalog.standardized.warehouse: "s3a://standardized/"
-    spark.sql.catalog.standardized.s3.endpoint: "http://minio.lake.svc.cluster.default:9000"
+    spark.sql.catalog.standardized.s3.endpoint: "http://minio.minio.svc.cluster.default:9000"
     spark.sql.catalog.standardized.catalog-impl: "org.apache.iceberg.nessie.NessieCatalog"
-    spark.sql.catalog.standardized.uri: "http://nessie.lake.svc.cluster.default:19120/api/v1/"
+    spark.sql.catalog.standardized.uri: "http://nessie.lakehouse.svc.cluster.default:19120/api/v1/"
     spark.sql.catalog.standardized.authentication.type: "NONE"
     spark.sql.catalog.standardized.ref: "main"
     spark.sql.catalog.standardized: "org.apache.iceberg.spark.SparkCatalog"
   hadoopConf:
     fs.s3a.access.key: "minioadmin"
     fs.s3a.secret.key: "minio@demo!"
-    fs.s3a.endpoint: "http://minio.lake.svc.cluster.default:9000"
+    fs.s3a.endpoint: "http://minio.lakehouse.svc.cluster.default:9000"
     fs.s3a.connection.ssl.enabled: "false"
     fs.s3a.path.style.access: "true"
     fs.s3a.attempts.maximum: "1"
