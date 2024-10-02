@@ -1,14 +1,14 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: spark-etl
+  name: spark-etl-eureka
   namespace: default
 spec:
   type: Python
   pythonVersion: "3"
   mode: cluster
   image: zetsu225/eureka:dev-6b4562c4def668fd79809d1555b0eba4aef04f78
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: 
   mainApplicationFile: local:///app/main.py
   sparkVersion: "3.3.1"
   restartPolicy:
