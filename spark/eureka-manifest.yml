@@ -9,7 +9,7 @@ spec:
   mode: cluster
   image: zetsu225/eureka:dev-6b4562c4def668fd79809d1555b0eba4aef04f78
   imagePullPolicy: 
-  mainApplicationFile: local:///app/main.py
+  mainApplicationFile: local:///opt/spark/work-dir/main.py
   sparkVersion: "3.3.1"
   restartPolicy:
     type: Never
