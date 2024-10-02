@@ -2,7 +2,7 @@ apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
   name: spark-etl
-  namespace: spark-apps
+  namespace: default
 spec:
   type: Python
   pythonVersion: "3"
@@ -20,7 +20,7 @@ spec:
     spark.sql.catalog.standardized.warehouse: "s3a://standardized/"
     spark.sql.catalog.standardized.s3.endpoint: "http://minio.minio.svc.cluster.default:9000"
     spark.sql.catalog.standardized.catalog-impl: "org.apache.iceberg.nessie.NessieCatalog"
-    spark.sql.catalog.standardized.uri: "http://nessie.nessie-catalog-space.svc.cluster.default:19120/api/v1/"
+    spark.sql.catalog.standardized.uri: "http://nessie.default.svc.cluster.default:19120/api/v1/"
     spark.sql.catalog.standardized.authentication.type: "NONE"
     spark.sql.catalog.standardized.ref: "main"
     spark.sql.catalog.standardized: "org.apache.iceberg.spark.SparkCatalog"
