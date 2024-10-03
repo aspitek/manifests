@@ -25,7 +25,7 @@ spec:
     excludePackages:
       - org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.5.0
   driver:
-    cores: 0.5
+    cores: 1
     memory: "256m"
     labels:
       version: 3.3.2
@@ -36,7 +36,7 @@ spec:
       - name: AWS_SECRET_ACCESS_KEY
         value: minio@demo!
   executor:
-    cores: 0.5
+    cores: 1
     instances: 1
     memory: "256m"
     labels:
