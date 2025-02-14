@@ -53,7 +53,7 @@ spec:
     app: solfa-back #app-name
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 8080
       nodePort: 32040 #port to be define
   type: NodePort
