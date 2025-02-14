@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solfa-back  # Nom du déploiement
+  namespace: solfa-space  # Espace de noms
+  labels:
+    app: solfa-back  # Étiquette pour l'application
+spec:
+  replicas: 1  # Nombre de réplicas souhaités
+  selector:
+    matchLabels:
+      app: solfa-back  # Étiquette pour correspondre aux pods
+  template:
+    metadata:
+      labels:
+        app: solfa-back  # Étiquette pour les pods
+    spec:
+      containers:
+        - name: solfa-back  # Nom du conteneur
+          image: zetsu225/solfa-back:dev-d8089d35ecd989f8e76540e52eebc18c70231d58
+          ports:
+            - containerPort: 8000  # Port écouté par l'application
+          envFrom:
+            - configMapRef:
+                name: solfa-back  # Référence au ConfigMap
+          # resources:
+          #   limits:
+          #     cpu: "500m"  # Limites de CPU
+          #     memory: "600Mi"  # Limites de mémoire
+          #   # requests:
+          #   #   cpu: "250m"  # Requêtes de CPU
+          #   #   memory: "300Mi"  # Requêtes de mémoire
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: solfa-back
+  namespace: solfa-space
+data:
+  
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: solfa-back #service-name
+  namespace: solfa-space #namespace
+spec:
+  selector:
+    app: solfa-back #app-name
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 32040 #port to be define
+  type: NodePort
+
+  
