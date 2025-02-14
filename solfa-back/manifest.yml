@@ -39,7 +39,7 @@ metadata:
   name: solfa-back
   namespace: solfa-space
 data:
-  
+  ES_URL: "http://10.242.68.64:9202/"
 
 
 ---
@@ -54,7 +54,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8000
+      targetPort: 8080
       nodePort: 32040 #port to be define
   type: NodePort
 
