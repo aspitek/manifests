@@ -19,7 +19,7 @@ spec:
         - name: solfa-back  # Nom du conteneur
           image: zetsu225/solfa-back:dev-d8089d35ecd989f8e76540e52eebc18c70231d58
           ports:
-            - containerPort: 8000  # Port écouté par l'application
+            - containerPort: 8080  # Port écouté par l'application
           envFrom:
             - configMapRef:
                 name: solfa-back  # Référence au ConfigMap
