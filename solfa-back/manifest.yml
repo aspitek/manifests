@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: solfa-back  # Nom du conteneur
-          image: zetsu225/solfa:dev-9a2d7f20f6b134b5530f1b7e2361081c73f301b9
+          image: zetsu225/solfa:dev-5a265eba5f9e1026ff3bc0a64e8b0d87f3c3d847
           ports:
             - containerPort: 8080  # Port écouté par l'application
           envFrom:
