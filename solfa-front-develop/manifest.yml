@@ -45,7 +45,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 32041 #port to be define
+      nodePort: 32042 #port to be define
   type: NodePort
 
   
