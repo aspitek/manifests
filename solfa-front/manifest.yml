@@ -54,6 +54,7 @@ metadata:
   name: solfa-front-ingress
   namespace: solfa-space
 spec:
+  ingressClassName: nginx
   rules:
   - host: srv598321.hstgr.cloud
     http:
