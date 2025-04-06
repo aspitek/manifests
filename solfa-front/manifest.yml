@@ -53,7 +53,7 @@ metadata:
   name: solfa-front-ingress
   namespace: solfa-space
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /solfa
 spec:
   rules:
   - host: srv598321.hstgr.cloud
