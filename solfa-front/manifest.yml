@@ -45,13 +45,13 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: ClusterIp
-  
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: solfa-front-ingress
+  namespace: solfa-space
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -66,6 +66,3 @@ spec:
             name: solfa-front
             port:
               number: 80
-
-
-  
