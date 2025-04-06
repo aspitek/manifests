@@ -19,7 +19,7 @@ spec:
         - name: solfa-front  # Nom du conteneur
           image: zetsu225/solfa:dev-5ff853b595be56a9ea6cd32507f0cd01e0bbf578
           ports:
-            - containerPort: 8080  # Port écouté par l'application
+            - containerPort: 80  # Port écouté par l'application
           envFrom:
             - configMapRef:
                 name: solfa-front  # Référence au ConfigMap
@@ -36,33 +36,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: solfa-front
-  namespace: solfa-space
+  name: solfa-front #service-name
+  namespace: solfa-space #namespace
 spec:
   selector:
-    app: solfa-front
+    app: solfa-front #app-name
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080   # Modifie ce port pour correspondre à celui du conteneur
-  type: ClusterIP
+      targetPort: 80
+      nodePort: 32041 #port to be define
+  type: NodePort
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: solfa-front-ingress
-  namespace: solfa-space
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: srv598321.hstgr.cloud
-    http:
-      paths:
-      - path: /solfa
-        pathType: Prefix
-        backend:
-          service:
-            name: solfa-front
-            port:
-              number: 80
+  
