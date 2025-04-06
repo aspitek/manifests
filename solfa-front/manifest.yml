@@ -44,7 +44,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80  # Le port que le service expose
-      targetPort: 8080  # Le port que le conteneur écoute
+      targetPort: 80  # Le port que le conteneur écoute
   type: ClusterIP  # Service interne accessible par Ingress
 
 ---
