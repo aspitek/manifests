@@ -59,7 +59,7 @@ spec:
   - host: srv598321.hstgr.cloud
     http:
       paths:
-      - path: /
+      - path: /solfa
         pathType: Prefix
         backend:
           service:
