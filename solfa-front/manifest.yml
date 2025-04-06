@@ -36,16 +36,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: solfa-front #service-name
-  namespace: solfa-space #namespace
+  name: solfa-front
+  namespace: solfa-space
 spec:
   selector:
-    app: solfa-front #app-name
+    app: solfa-front
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080   # Modifie ce port pour correspondre à celui du conteneur
   type: ClusterIP
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
