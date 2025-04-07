@@ -54,12 +54,13 @@ metadata:
   namespace: solfa-space
 spec:
   rules:
-    - http:
+    - host: "srv598321.hstgr.cloud"  # Replace with your domain
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: solfa-front  # ✔ corrigé ici
+                name: solfa-front
                 port:
-                  number: 80       # ✔ corrigé ici
+                  number: 80
