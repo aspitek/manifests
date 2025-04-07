@@ -36,37 +36,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: solfa-front  # Nom du service
-  namespace: solfa-space  # Namespace
+  name: solfa-front #service-name
+  namespace: solfa-space #namespace
 spec:
   selector:
-    app: solfa-front  # Correspond aux pods avec l'étiquette "app: solfa-front"
+    app: solfa-front #app-name
   ports:
     - protocol: TCP
-      port: 80  # Le port que le service expose
-      targetPort: 80  # Le port que le conteneur écoute
-  type: ClusterIP  # Service interne accessible par Ingress
+      port: 80
+      targetPort: 80
+      nodePort: 32041 #port to be define
+  type: NodePort
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: solfa-front-ingress  # Nom de l'Ingress
-  namespace: solfa-space  # Namespace
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: "/"  # Réécriture des URLs pour le service
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: srv598321.hstgr.cloud  # Remplacez par votre domaine ou IP publique
-      http:
-        paths:
-          - path: /  # Chemin vers lequel router les requêtes
-            pathType: Prefix
-            backend:
-              service:
-                name: solfa-front  # Le nom du service Kubernetes
-                port:
-                  number: 80  # Port exposé par le service
-
-
+  
