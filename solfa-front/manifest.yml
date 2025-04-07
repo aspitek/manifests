@@ -45,7 +45,22 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 32041 #port to be define
-  type: NodePort
+  type: ClusterIP
 
   
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: solfa-front-ingress
+  namespace: solfa-space
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: solfa-font
+            port: 80
