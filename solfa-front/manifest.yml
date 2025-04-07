@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: solfa-front  # Nom du déploiement
-  namespace: solfa-space  # Espace de noms
+  name: solfa-front # Nom du déploiement
+  namespace: solfa-space # Espace de noms
   labels:
-    app: solfa-front  # Étiquette pour l'application
+    app: solfa-front # Étiquette pour l'application
 spec:
-  replicas: 1  # Nombre de réplicas souhaités
+  replicas: 1 # Nombre de réplicas souhaités
   selector:
     matchLabels:
-      app: solfa-front  # Étiquette pour correspondre aux pods
+      app: solfa-front # Étiquette pour correspondre aux pods
   template:
     metadata:
       labels:
-        app: solfa-front  # Étiquette pour les pods
+        app: solfa-front # Étiquette pour les pods
     spec:
       containers:
-        - name: solfa-front  # Nom du conteneur
+        - name: solfa-front # Nom du conteneur
           image: zetsu225/solfa:dev-5ff853b595be56a9ea6cd32507f0cd01e0bbf578
           ports:
-            - containerPort: 80  # Port écouté par l'application
+            - containerPort: 80 # Port écouté par l'application
           envFrom:
             - configMapRef:
-                name: solfa-front  # Référence au ConfigMap
+                name: solfa-front # Référence au ConfigMap
           # resources:
           #   limits:
           #     cpu: "500m"  # Limites de CPU
@@ -31,23 +31,21 @@ spec:
           #   #   cpu: "250m"  # Requêtes de CPU
           #   #   memory: "300Mi"  # Requêtes de mémoire
 
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: solfa-front #service-name
-  namespace: solfa-space #namespace
+  name: solfa-front
+  namespace: solfa-space
 spec:
   selector:
-    app: solfa-front #app-name
+    app: solfa-front
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
   type: ClusterIP
 
-  
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -56,11 +54,12 @@ metadata:
   namespace: solfa-space
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: solfa-font
-            port: 80
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: solfa-front  # ✔ corrigé ici
+                port:
+                  number: 80       # ✔ corrigé ici
