@@ -45,3 +45,24 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: solfa-front-ingress
+  namespace: solfa-space
+  annotations:
+    traefik.ingress.kubernetes.io/rewrite-target: /  # Réécrit /solfa/ en /
+spec:
+  rules:
+    - host: "srv598321.hstgr.cloud"  # Remplace par ton domaine
+      http:
+        paths:
+          - path: /solfa(/|$)(.*)  # Match /solfa/* et sous-chemins
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: solfa-front
+                port:
+                  number: 80
