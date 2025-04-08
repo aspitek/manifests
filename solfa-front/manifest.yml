@@ -52,15 +52,13 @@ kind: Ingress
 metadata:
   name: solfa-front-ingress
   namespace: solfa-space
-  annotations:
-    traefik.ingress.kubernetes.io/rewrite-target: /  # Réécriture vers la racine
 spec:
   rules:
-    - host: "srv598321.hstgr.cloud"  # Remplace par ton domaine
+    - host: "srv598321.hstgr.cloud"  # Replace with your domain
       http:
         paths:
-          - path: /solfa(/|$)(.*)  # Toutes les URLs commençant par /solfa
-            pathType: Prefix  # Type de chemin à utiliser
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: solfa-front
