@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: solfa-renom # Nom du conteneur
-          image: zetsu225/solfa:dev-8438f6679fc475efa1f6269a3dd428b9695ef6f6
+          image: zetsu225/solfa:dev-967963e5daf1c1a61e90acdecc972b4da631d061
           ports:
             - containerPort: 3000 # Port écouté par l'application
           volumeMounts:
