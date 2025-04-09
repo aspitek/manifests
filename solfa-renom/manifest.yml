@@ -20,6 +20,15 @@ spec:
           image: zetsu225/solfa:dev-5ff853b595be56a9ea6cd32507f0cd01e0bbf578
           ports:
             - containerPort: 3000 # Port écouté par l'application
+          volumeMounts:
+            - name: google-auth-volume
+              mountPath: "/app/backend/config/google-auth.json"
+              subPath: "google-auth.json"
+              readOnly: true
+          volumes:
+          - name: google-auth-volume
+            secret:
+              secretName: google-auth-secret
           envFrom:
             - configMapRef:
                 name: solfa-renom # Référence au ConfigMap
