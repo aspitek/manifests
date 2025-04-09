@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solfa-renom # Nom du déploiement
+  namespace: solfa-space # Espace de noms
+  labels:
+    app: solfa-renom # Étiquette pour l'application
+spec:
+  replicas: 1 # Nombre de réplicas souhaités
+  selector:
+    matchLabels:
+      app: solfa-renom # Étiquette pour correspondre aux pods
+  template:
+    metadata:
+      labels:
+        app: solfa-renom # Étiquette pour les pods
+    spec:
+      containers:
+        - name: solfa-renom # Nom du conteneur
+          image: zetsu225/solfa:dev-5ff853b595be56a9ea6cd32507f0cd01e0bbf578
+          ports:
+            - containerPort: 3000 # Port écouté par l'application
+          envFrom:
+            - configMapRef:
+                name: solfa-renom # Référence au ConfigMap
+          # resources:
+          #   limits:
+          #     cpu: "500m"  # Limites de CPU
+          #     memory: "600Mi"  # Limites de mémoire
+          #   # requests:
+          #   #   cpu: "250m"  # Requêtes de CPU
+          #   #   memory: "300Mi"  # Requêtes de mémoire
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: solfa-renom
+  namespace: solfa-space
+spec:
+  selector:
+    app: solfa-renom
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 32043
+  type: NodePort
