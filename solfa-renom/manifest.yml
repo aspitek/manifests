@@ -25,10 +25,7 @@ spec:
               mountPath: "/app/backend/config/google-auth.json"
               subPath: "google-auth.json"
               readOnly: true
-          volumes:
-          - name: google-auth-volume
-            secret:
-              secretName: google-auth-secret
+          
           envFrom:
             - configMapRef:
                 name: solfa-renom # Référence au ConfigMap
@@ -39,6 +36,10 @@ spec:
           #   # requests:
           #   #   cpu: "250m"  # Requêtes de CPU
           #   #   memory: "300Mi"  # Requêtes de mémoire
+      volumes:
+          - name: google-auth-volume
+            secret:
+              secretName: google-auth-secret
 
 ---
 apiVersion: v1
