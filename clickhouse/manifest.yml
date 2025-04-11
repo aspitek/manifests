@@ -2,64 +2,57 @@ apiVersion: "clickhouse.altinity.com/v1"
 kind: "ClickHouseInstallation"
 metadata:
   name: "clickhouse-01"
+  namespace: clickhouse  # facultatif, adapte selon ton cas
 spec:
   configuration:
-    # zookeeper:
-    #   nodes:
-    #     - host: zookeeper-0.zookeepers.zoons
-    #   port: 2181
     users:
-        demo/default: secret
-        demo/password: 12345678
-        demo/profile: default
-        demo/quota: default
-        demo/networks/ip: "::/0"
+      demo/default: secret
+      demo/password: 12345678
+      demo/profile: default
+      demo/quota: default
+      demo/networks/ip: "::/0"
     clusters:
       - name: "clickhouse-01"
         layout:
-          type: Standard
+          type: "Standard"
           shardsCount: 1
           replicasCount: 1
   defaults:
-    deployment:
-      podTemplate: clickhouse-stable
-      volumeClaimTemplate: storage-vc-template
     templates:
       podTemplates:
         - name: clickhouse-stable
-          containers:
-        - name: clickhouse
-          image: yandex/clickhouse-server:19.4.3.11
-          # resources:
-          #   requests:
-          #     memory: "512Mi"
-          #     cpu: "500m"
-          #   limits:
-          #     memory: "512Mi"
-          #     cpu: "500m"
+          podTemplateSpec:
+            containers:
+              - name: clickhouse
+                image: yandex/clickhouse-server:19.4.3.11
+                # resources:
+                #   requests:
+                #     memory: "512Mi"
+                #     cpu: "500m"
+                #   limits:
+                #     memory: "512Mi"
+                #     cpu: "500m"
       volumeClaimTemplates:
         - name: storage-vc-template
-          persistentVolumeClaim:
-            spec:
-              storageClassName: longhorn
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 2Gi
-      serviceTemplate:
-        metadata:
-          name: clickhouse-service
-        spec:
-          ports:
-            - name: http
-              port: 8123
-              targetPort: 8123
-              nodePort: 30123
-            - name: tcp
-              port: 9000
-              targetPort: 9000
-              nodePort: 30900
-          type: NodePort
-          selector:
-            clickhouse.altinity.com/chi: clickhouse-01
+          spec:
+            storageClassName: longhorn
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2Gi
+      serviceTemplates:
+        - name: clickhouse-service
+          generateName: "clickhouse-service"
+          spec:
+            type: NodePort
+            ports:
+              - name: http
+                port: 8123
+                targetPort: 8123
+                nodePort: 30123
+              - name: tcp
+                port: 9000
+                targetPort: 9000
+                nodePort: 30900
+  
