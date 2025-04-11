@@ -48,18 +48,18 @@ spec:
                 requests:
                   storage: 2Gi
       serviceTemplate:
-      metadata:
-        name: clickhouse-service
-      spec:
-        ports:
-          - name: http
-            port: 8123
-            targetPort: 8123
-            nodePort: 30123
-          - name: tcp
-            port: 9000
-            targetPort: 9000
-            nodePort: 30900
-        type: NodePort
-        selector:
-          clickhouse.altinity.com/chi: clickhouse-01
+        metadata:
+          name: clickhouse-service
+        spec:
+          ports:
+            - name: http
+              port: 8123
+              targetPort: 8123
+              nodePort: 30123
+            - name: tcp
+              port: 9000
+              targetPort: 9000
+              nodePort: 30900
+          type: NodePort
+          selector:
+            clickhouse.altinity.com/chi: clickhouse-01
