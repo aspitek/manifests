@@ -1,11 +1,11 @@
 apiVersion: ollama.ayaka.io/v1
 kind: Model
 metadata:
-  name: llama3.2
+  name: llama3
   namespace: ollama
 spec:
   replicas: 1
-  image: llama3.2
+  image: llama3
   imagePullPolicy: IfNotPresent
   resources:
     limits:
@@ -17,7 +17,9 @@ spec:
     #   memory: 8Gi
     #   nvidia.com/gpu: 1 # If you got GPUs
   storageClassName: longhorn
-  persistentVolumeClaim: llama32-pvc
+  persistentVolumeClaim: llama3-pvc
   persistentVolume:
     accessMode: ReadWriteOnce
+---
+
 
