@@ -36,3 +36,4 @@ spec:
     claimName: ollama
   persistentVolume:
     accessMode: ReadWriteOnce
+    size: 5Gi
