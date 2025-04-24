@@ -1,7 +1,7 @@
 apiVersion: ollama.ayaka.io/v1
 kind: Model
 metadata:
-  name: llama32
+  name: llama3.2
   namespace: ollama
 spec:
   replicas: 1
