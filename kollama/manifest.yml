@@ -17,7 +17,7 @@ spec:
     #   memory: 8Gi
     #   nvidia.com/gpu: 1 # If you got GPUs
   storageClassName: longhorn
-  persistentVolumeClaim: ollama
+  persistentVolumeClaim: "ollama"
   persistentVolume:
     accessMode: ReadWriteOnce
 ---
